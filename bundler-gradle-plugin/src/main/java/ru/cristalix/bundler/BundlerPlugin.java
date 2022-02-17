@@ -39,7 +39,8 @@ public class BundlerPlugin implements Plugin<Project> {
         } catch (Exception exception) {
             logger.warn("Unable to retrieve path to rt.jar! Are you running JDK 9+?");
         }
-
+        
+        proGuardTask.dontwarn("kotlinx.serialization.**");
         proGuardTask.useuniqueclassmembernames();
         proGuardTask.dontusemixedcaseclassnames();
         String packageName = properitesTask.getModName().replaceAll("[^A-Za-z]", "_");
@@ -57,7 +58,7 @@ public class BundlerPlugin implements Plugin<Project> {
                 "    public static **[] values();\n" +
                 "    public static ** valueOf(java.lang.String);\n" +
                 "}");
-
+               
         proGuardTask.getActions().add(0, (taskIgnored) -> {
             try {
                 proGuardTask.keep(Collections.singletonMap("allowobfuscation", true), "class " + proGuardTask.getMainClass());
