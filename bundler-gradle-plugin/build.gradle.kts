@@ -27,7 +27,7 @@ pluginBundle {
 dependencies {
 
     implementation("com.android.tools.build:gradle:2.3.0")
-    api("net.sf.proguard:proguard-gradle:6.2.2")
+    api("com.guardsquare:proguard-gradle:7.2.0")
 
     compileOnly(gradleApi())
 
